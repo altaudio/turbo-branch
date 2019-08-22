@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -28,8 +27,6 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-
-		fmt.Println(branch)
 
 		cmd := exec.Command("git", "checkout", branch)
 		err = cmd.Run()
