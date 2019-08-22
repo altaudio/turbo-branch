@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 
 	"turbo-branch/git"
 
@@ -29,6 +30,13 @@ func main() {
 		}
 
 		fmt.Println(branch)
+
+		cmd := exec.Command("git", "checkout", branch)
+		err = cmd.Run()
+		if err != nil {
+			log.Fatal(err)
+		}
+
 		return nil
 	}
 
