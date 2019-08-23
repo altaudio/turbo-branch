@@ -11,6 +11,9 @@ import (
 	"github.com/urfave/cli"
 )
 
+// TODO: Find .git directory recursively
+// TODO: Only getting the first part of the branch name :(
+
 func main() {
 	app := cli.NewApp()
 	app.Name = "Turbo Branch"

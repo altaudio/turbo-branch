@@ -1,7 +1,6 @@
 package git
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -16,18 +15,21 @@ func GetBranches() []string {
 
 	var b strings.Builder
 	b.WriteString(callPath)
-	b.WriteString("/.git/refs/heads")
+	b.WriteString("/.git/refs/heads/")
+	headsPath := b.String()
 
-	files, err := ioutil.ReadDir(b.String())
-	if err != nil {
-		log.Fatal(err)
-	}
+	var branches []string
 
-	var fileNames []string
+	filepath.Walk(headsPath, func(path string, info os.FileInfo, err error) error {
+		if info.IsDir() {
+			return err
+		}
 
-	for _, f := range files {
-		fileNames = append(fileNames, f.Name())
-	}
+		branch := strings.Replace(path, headsPath, "", 1)
+		branches = append(branches, branch)
 
-	return fileNames
+		return err
+	})
+
+	return branches
 }
