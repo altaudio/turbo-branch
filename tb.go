@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -10,9 +11,6 @@ import (
 	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli"
 )
-
-// TODO: Find .git directory recursively
-// TODO: Only getting the first part of the branch name :(
 
 func main() {
 	app := cli.NewApp()
@@ -31,6 +29,7 @@ func main() {
 			log.Fatal(err)
 		}
 
+		fmt.Println(err)
 		cmd := exec.Command("git", "checkout", branch)
 		err = cmd.Run()
 		if err != nil {
