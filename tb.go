@@ -29,9 +29,11 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Println(err)
 		cmd := exec.Command("git", "checkout", branch)
-		err = cmd.Run()
+		out, err := cmd.CombinedOutput()
+
+		fmt.Println(string(out))
+
 		if err != nil {
 			log.Fatal(err)
 		}
