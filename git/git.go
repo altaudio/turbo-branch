@@ -2,7 +2,6 @@ package git
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -31,15 +30,11 @@ func getGitFilePath(root string) (string, error) {
 			return "", err
 		}
 
-		fmt.Println(fileExists)
-		fmt.Println(gitFilePath)
-
 		if fileExists {
 			return gitFilePath, nil
 		}
 
 		directories = directories[:len(directories)-1]
-		fmt.Println(gitFilePath)
 	}
 
 	return "", errors.New("getGitFilePath: Could not find a .git directory.")
